@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title>场馆申请</title>
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/common.js"></script>
+		<style>
+			/*.addbcMid .pr .pa .addRgray{*/
+			/*color: #9E9E9E;*/
+			/*}*/
+			
+			.addbcIpt input {
+				color: #343434;
+				border: none;
+				padding: 0;
+				margin: 0;
+				height: 2rem;
+				line-height: 2rem;
+			}
+			
+			.addbcBtn {
+				margin-bottom: 1rem;
+			}
+			
+			.addbcBtn button {
+				/*height: 3rem;
+                line-height: 3rem;*/
+				font-size: 1.4rem;
+				padding: 0;
+			}
+			
+			.pickTypeCover h3 {
+				position: absolute;
+				background: #fff;
+				line-height: 4rem;
+				width: 100%;
+				height: 4rem;
+				z-index: 500;
+				bottom: 30rem;
+				left: 0;
+				font-size: 1.5rem;
+				padding: 0 1.2rem;
+				font-weight: 600;
+				border-bottom: 1px solid #F4F4F4;
+			}
+			
+			.pickType {
+				height: 30rem;
+				overflow: hidden;
+			}
+			
+			.pickType ul {
+				position: relative;
+				top: 0;
+				left: 0;
+			}
+			
+			.addbcMid .addbcIpt .pickshow {
+				display: block;
+			}
+			
+			.addbcMid .addbcIpt .pickshow .pa {
+				top: 1.1rem;
+			}
+			/* #pickLoc img{
+                margin-top: 0.3rem;
+            } */
+			
+			.addbcMid .pr .pa.upDelate {
+				top: 0.1rem;
+				background-color: transparent !important;
+				display: none;
+				right: 0.3rem;
+				width: 2rem;
+				padding: 0 !important;
+			}
+			
+			.addbcMid .picspecial {
+				width: 12rem!important;
+				right: 2rem;
+				top: 1rem;
+			}
+			
+			.scroll {
+				top: 0;
+				right: 0;
+				width: 5px;
+				height: 10px;
+				min-height: 10px;
+				background-color: orange;
+			}
+			
+			.uploadImg .upload {
+				height: 10rem;
+			}
+			
+			.addbcBtn {
+				margin-top: 2rem;
+				margin-bottom: 3rem;
+			}
+			
+			.addbcBtn button {
+				height: 4rem;
+				line-height: 4rem;
+			}
+			
+			.upload label {
+				height: 7.5rem;
+			}
+			
+			.upload label .imgId {
+				top: 1.8rem;
+			}
+			
+			.pickshow .picspecial {
+				color: #9E9E9E;
+				margin-right: 0.5rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 顶部 -->
+		<div class="pf top">
+			<h2>场馆申请</h2>
+		</div>
+
+		<!-- 场馆申请 -->
+		<div class="venueApplicate">
+			<p>场馆单位入围资格申请，请填写/上传真实资料</p>
+
+			<div class="addbcMid">
+				<h5>商户基本信息</h5>
+
+				<div class="addbcIpt" style="border-bottom: 1px solid #F7F7F7; ">
+					<div class="fr">
+						<input id="vName" type="text" placeholder="请输入名称" value="" />
+					</div>
+
+					商户名称
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt" style="border-bottom: 1px solid #EBEBEB; ">
+					<div class="fr">
+						<input id="vShortName" type="text" placeholder="请输入简称" value="" />
+					</div>
+
+					商户简称
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt" style="border-bottom: 1px solid #F7F7F7; ">
+					<div class="fr">
+						<input id="vPhone" type="number" pattern="[0-9]*" placeholder="请输入联系电话" value="" />
+					</div>
+
+					商户联系电话
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt" style="border-bottom: 1px solid #EBEBEB; ">
+					<div class="fr">
+						<input id="vEmail" type="text" placeholder="请输入邮箱" value="" />
+					</div>
+
+					商户邮箱
+
+					<div class="clearfix"></div>
+				</div>
+
+				<!--<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+                    <div class="pa pickshow" id="pickPro">
+                        <img class="fr" src="images/right.png"/>
+                        <span class="picspecial" id="ProArea">请选择</span>
+                        <div class="clearfix"></div>
+                    </div>-->
+
+				<!-- 选择所在省 -->
+				<!-- <div class="pf tl pickTypeCover" id="provincelist">
+                        <div class="pickOut" style="height: 100%;"></div>
+
+                        <h3>选择所在省</h3>
+
+                        <div class="pa pickType" id="provinces">
+                            <ul>
+                                <li>北京市</li>
+                                <li>上海市</li>
+                                <li>天津市</li>
+                                <li>重庆市</li>
+                                <li>黑龙江省</li>
+                                <li>辽宁省</li>
+                                <li>吉林省</li>
+                                <li>河北省</li>
+                                <li>河南省</li>
+                                <li>湖北省</li>
+                                <li>湖南省</li>
+                                <li>山东省</li>
+                                <li>山西省</li>
+                                <li>陕西省</li>
+                                <li>安徽省</li>
+                                <li>浙江省</li>
+                                <li>江苏省</li>
+                                <li>福建省</li>
+                                <li>广东省</li>
+                                <li>海南省</li>
+                                <li>四川省</li>
+                                <li>云南省</li>
+                                <li>贵州省</li>
+                                <li>青海省</li>
+                                <li>甘肃省</li>
+                                <li>江西省</li>
+                                <li>台湾省</li>
+                                <li>内蒙古自治区</li>
+                                <li>宁夏回族自治区</li>
+                                <li>新疆维吾尔自治区</li>
+                                <li>西藏自治区</li>
+                                <li>广西壮族自治区</li>
+                                <li>香港特别行政区</li>
+                                <li>澳门特别行政区</li>
+                            </ul>
+
+                            <div class="pa scroll">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    所在省
+                </div>-->
+
+				<!--<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+                    <div class="pa pickshow" id="pickCity">
+                        <img class="fr" src="images/right.png"/>
+                        <span class="picspecial" id="vCityArea">请选择</span>
+                        <div class="clearfix"></div>
+                    </div>-->
+
+				<!-- 选择所在市 -->
+				<!--<div class="pf tl pickTypeCover" id="citylist">
+                        <div class="pickOut" style="height: 100%;"></div>
+
+                        <h3>选择所在市</h3>
+
+                        <div class="pa pickType" id="cities">
+                            <ul>
+                                <li>大同市</li>
+                                <li>朔州市</li>
+                                <li>忻州市</li>
+                                <li>阳泉市</li>
+                                <li>吕梁市</li>
+                                <li>晋中市</li>
+                                <li>长治市</li>
+                                <li>晋城市</li>
+                                <li>临汾市</li>
+                                <li>运城市</li>
+                            </ul>
+
+                            <div class="pa scroll">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    所在市
+                </div>-->
+				<!--选择所在区县-->
+				<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+					<div class="pa pickshow" id="pickCounty">
+						<img class="fr" src="images/right.png" />
+						<span class="picspecial" id="certType">请选择</span>
+						<div class="clearfix"></div>
+					</div>
+					<!--选择所在区县-->
+					<!-- 选择商户注册证件类型 -->
+					<div class="pf tl pickTypeCover" id="countylist">
+						<div class="pickOut" style="height: 100%;"></div>
+
+						<h3>选择商户注册证件类型</h3>
+
+						<div class="pa pickType" id="counties">
+							<ul>
+								<li>全国组织机构代码证书</li>
+								<li>营业执照</li>
+								<li>其他</li>
+								<li>商业登记证</li>
+								<li>公司注册证</li>
+							</ul>
+
+							<div class="pa scroll">
+								<p></p>
+							</div>
+						</div>
+					</div>
+
+					所在区县
+				</div>
+
+				<div class="addbcIpt" style="border-bottom: none; ">
+					<div class="fr">
+						<input id="detailAddress" type="text" placeholder="请输入地址" value="" />
+					</div>
+
+					详细地址
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="postCode" type="number" pattern="[0-9]*" placeholder="请输入邮政编码" value="" />
+					</div>
+
+					邮政编码
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<div class="addbcMid">
+				<h5>商户超管信息</h5>
+
+				<div class="addbcIpt" style="border-bottom: none; ">
+					<div class="fr">
+						<input id="oName" type="text" placeholder="请输入姓名" value="" />
+					</div>
+
+					商户超管姓名
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="oPhone" type="number" pattern="[0-9]*" placeholder="请输入手机号" value="" />
+					</div>
+
+					商户超管手机
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt" style="border-bottom: none; ">
+					<div class="fr">
+						<input id="oEmail" type="text" placeholder="请输入邮箱" value="" />
+					</div>
+
+					商户超管邮箱
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="oIdNum" type="number" pattern="[0-9]*" placeholder="请输入身份证号" value="" />
+					</div>
+
+					商户超管身份证号
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<div class="addbcMid">
+				<h5>商户信息</h5>
+
+				<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+					<div class="pa pickshow" id="pickType">
+						<img class="fr" src="images/right.png" />
+						<span class="picspecial" id="vType">请选择</span>
+						<div class="clearfix"></div>
+					</div>
+
+					<!-- 选择商户类型 -->
+					<div class="pf tl pickTypeCover" id="typelist">
+						<div class="pickOut" style="height: 100%;"></div>
+
+						<h3>选择商户类型</h3>
+
+						<div class="pa pickType" id="types">
+							<ul>
+								<li>企业</li>
+								<li>个体工商户</li>
+							</ul>
+
+							<div class="pa scroll">
+								<p></p>
+							</div>
+						</div>
+					</div>
+
+					商户类型
+				</div>
+
+				<div class="addbcIpt" style="border-bottom: none; ">
+					<div class="fr">
+						<input id="cName" type="text" placeholder="请输入姓名" value="" />
+					</div>
+
+					法人/负责人姓名
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="cPhone" type="number" pattern="[0-9]*" placeholder="请输入手机号" value="" />
+					</div>
+
+					法人/负责人手机号
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+					<div class="pa pickshow" id="pickcType">
+						<img class="fr" src="images/right.png" />
+						<span class="picspecial" id="cType">请选择</span>
+						<div class="clearfix"></div>
+					</div>
+
+					<!-- 选择法人/负责人证件类型 -->
+					<div class="pf tl pickTypeCover" id="ctypelist">
+						<div class="pickOut" style="height: 100%;"></div>
+
+						<h3>选择法人/负责人证件类型</h3>
+
+						<div class="pa pickType" id="ctypes">
+							<ul>
+								<li>身份证</li>
+								<li>护照</li>
+								<li>军官证</li>
+								<li>士兵证</li>
+								<li>港澳台往来通行证</li>
+								<li>临时身份证</li>
+								<li>户口簿</li>
+								<li>其他</li>
+								<li>警官证</li>
+								<li>外国人永久居留证</li>
+								<li>边民出入境通行证</li>
+							</ul>
+
+							<div class="pa scroll">
+								<p></p>
+							</div>
+						</div>
+					</div>
+
+					法人/负责人证件类型
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="cIdNum" type="number" pattern="[0-9]*" placeholder="请输入法人证件号" value="" />
+					</div>
+
+					法人/负责人证件号
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+					<div class="pa pickshow" id="pickcertType">
+						<img class="fr" src="images/right.png" />
+						<span class="picspecial" id="certType">请选择</span>
+						<div class="clearfix"></div>
+					</div>
+
+					<!-- 选择商户注册证件类型 -->
+					<div class="pf tl pickTypeCover" id="certtypelist">
+						<div class="pickOut" style="height: 100%;"></div>
+
+						<h3>选择商户注册证件类型</h3>
+
+						<div class="pa pickType" id="certtypes">
+							<ul>
+								<li>全国组织机构代码证书</li>
+								<li>营业执照</li>
+								<li>其他</li>
+								<li>商业登记证</li>
+								<li>公司注册证</li>
+							</ul>
+
+							<div class="pa scroll">
+								<p></p>
+							</div>
+						</div>
+					</div>
+
+					商户注册证件类型
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="certNum" type="number" pattern="[0-9]*" placeholder="请输入商户证件号" value="" />
+					</div>
+
+					商户注册证件号码
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<div class="addbcMid">
+				<h5>商户绑定银行卡信息</h5>
+
+				<div class="addbcIpt" style="border-bottom: none; ">
+					<div class="fr">
+						<input id="aName" type="text" placeholder="请输入开户名称" value="" />
+					</div>
+
+					商户绑定银行账户名
+
+					<div class="clearfix"></div>
+				</div>
+
+				<!--<div class="addbcIpt" style="border-bottom: none; ">
+                    <div class="fr">
+                        <input id="aPro" type="text" placeholder="请输入所在省" value=""/>
+                    </div>
+
+                    所在省
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="addbcIpt" style="border-bottom: none; ">
+                    <div class="fr">
+                        <input id="aCity" type="text" placeholder="请输入所在市" value=""/>
+                    </div>
+
+                    所在市
+
+                    <div class="clearfix"></div>
+                </div>-->
+
+				<div class="addbcIpt" style="border-bottom: none; ">
+					<div class="fr">
+						<input id="aBank" type="text" placeholder="请输入开户行" value="" />
+					</div>
+
+					开户行
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt" style="border-bottom: none; ">
+					<div class="fr">
+						<input id="aSub" type="text" placeholder="请输入开户支行" value="" />
+					</div>
+
+					开户支行
+
+					<div class="clearfix"></div>
+				</div>
+
+				<!--<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+                    <div class="pa pickshow" id="pickaPro">
+                        <img class="fr" src="images/right.png"/>
+                        <input class="pa picspecial" id="aProArea" type="text" placeholder="请选择" value="" disabled="disabled"/>
+                        <div class="clearfix"></div>
+                    </div>-->
+
+				<!-- 选择所在省 -->
+				<!--<div class="pf tl pickTypeCover" id="aprovincelist">
+                        <div class="pickOut" style="height: 100%;"></div>
+
+                        <h3>选择所在省</h3>
+
+                        <div class="pa pickType" id="aprovinces">
+                            <ul>
+                                <li>北京市</li>
+                                <li>上海市</li>
+                                <li>天津市</li>
+                                <li>重庆市</li>
+                                <li>黑龙江省</li>
+                                <li>辽宁省</li>
+                                <li>吉林省</li>
+                                <li>河北省</li>
+                                <li>河南省</li>
+                                <li>湖北省</li>
+                                <li>湖南省</li>
+                                <li>山东省</li>
+                                <li>山西省</li>
+                                <li>陕西省</li>
+                                <li>安徽省</li>
+                                <li>浙江省</li>
+                                <li>江苏省</li>
+                                <li>福建省</li>
+                                <li>广东省</li>
+                                <li>海南省</li>
+                                <li>四川省</li>
+                                <li>云南省</li>
+                                <li>贵州省</li>
+                                <li>青海省</li>
+                                <li>甘肃省</li>
+                                <li>江西省</li>
+                                <li>台湾省</li>
+                                <li>内蒙古自治区</li>
+                                <li>宁夏回族自治区</li>
+                                <li>新疆维吾尔自治区</li>
+                                <li>西藏自治区</li>
+                                <li>广西壮族自治区</li>
+                                <li>香港特别行政区</li>
+                                <li>澳门特别行政区</li>
+                            </ul>
+
+                            <div class="pa scroll">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    所在省
+                </div>-->
+
+				<!--<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+                    <div class="pa pickshow" id="pickaCounty">
+                        <img class="fr" src="images/right.png"/>
+                        <input class="pa picspecial" id="aCityArea" type="text" placeholder="请选择" value="" disabled="disabled"/>
+                        <div class="clearfix"></div>
+                    </div>-->
+
+				<!-- 选择所在市 -->
+				<!--<div class="pf tl pickTypeCover" id="acitylist">
+                        <div class="pickOut" style="height: 100%;"></div>
+
+                        <h3>选择所在市</h3>
+
+                        <div class="pa pickType" id="acities">
+                            <ul>
+                                <li>大同市</li>
+                                <li>朔州市</li>
+                                <li>忻州市</li>
+                                <li>阳泉市</li>
+                                <li>吕梁市</li>
+                                <li>晋中市</li>
+                                <li>长治市</li>
+                                <li>晋城市</li>
+                                <li>临汾市</li>
+                                <li>运城市</li>
+                            </ul>
+
+                            <div class="pa scroll">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    所在市
+                </div>-->
+
+				<!--<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+                    <div class="pa pickshow" id="pickBank">
+                        <img class="fr" src="images/right.png"/>
+                        <input class="pa picspecial" id="bank" type="text" placeholder="请选择" value="" disabled="disabled"/>
+                        <div class="clearfix"></div>
+                    </div>-->
+
+				<!-- 选择开户行 -->
+				<!--<div class="pf tl pickTypeCover" id="banklist">
+                        <div class="pickOut" style="height: 100%;"></div>
+
+                        <h3>选择开户行</h3>
+
+                        <div class="pa pickType" id="banks">
+                            <ul>
+                                <li>中国银行</li>
+                                <li>中国工商银行</li>
+                                <li>中国农业银行</li>
+                                <li>中国建设银行</li>
+                                <li>国家开发银行</li>
+                            </ul>
+
+                            <div class="pa scroll">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    开户行
+                </div>-->
+
+				<!--<div class="pr addbcIpt" style="border-bottom: 1px solid #F3F3F3; ">
+                    <div class="pa pickshow" id="pickaBank">
+                        <img class="fr" src="images/right.png"/>
+                        <input class="pa picspecial" id="abank" type="text" placeholder="请选择" value="" disabled="disabled"/>
+                        <div class="clearfix"></div>
+                    </div>-->
+
+				<!-- 选择开户支行 -->
+				<!--<div class="pf tl pickTypeCover" id="abanklist">
+                        <div class="pickOut" style="height: 100%;"></div>
+
+                        <h3>选择开户支行</h3>
+
+                        <div class="pa pickType" id="abanks">
+                            <ul>
+                                <li>天津汇盈支行</li>
+                                <li>天津杨村支行</li>
+                                <li>天津河东支行</li>
+                                <li>天津红桥支行</li>
+                                <li>天津津南支行</li>
+                            </ul>
+
+                            <div class="pa scroll">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    开户支行
+                </div>-->
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="aBankNum" type="number" pattern="[0-9]*" placeholder="请输入支行号" value="" />
+					</div>
+
+					开户支行行号
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="bankNum" type="number" pattern="[0-9]*" placeholder="请输入银行卡号" value="" />
+					</div>
+
+					银行卡号
+
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="addbcIpt">
+					<div class="fr">
+						<input id="bankPhone" type="number" pattern="[0-9]*" placeholder="请输入手机号" value="" />
+					</div>
+
+					银行预留手机号
+
+					<div class="clearfix"></div>
+				</div>
+
+			</div>
+
+			<div class="addbcMid">
+				<h5 style="border-bottom: 1px solid #EDEDED;">上传材料</h5>
+
+				<div class="uploadImg">
+
+					<div class="pr upload">
+						<label>
+                            <input type="file" accept="image/*" class="imgInput" multiple="multiple" />
+                            <img id="img-face" class="imgId" src="images/vren.png">
+                        </label>
+						<p class="ellipse">上传法人身份证人像面照片</p>
+						<div class="pa upDelate">
+							<img src="images/uploaddelate.png" alt="图片：删除" />
+						</div>
+					</div>
+
+					<div class="pr upload">
+						<label>
+                            <input type="file" accept="image/*" class="imgInput"/>
+                            <img id="img-fan" class="imgId" src="images/vhui.png">
+                        </label>
+						<p class="ellipse">上传法人身份证国徽面照片</p>
+						<div class="pa upDelate">
+							<img src="images/uploaddelate.png" alt="图片：删除" />
+						</div>
+					</div>
+
+					<div class="pr upload">
+						<label>
+                            <input type="file" accept="image/*" class="imgInput"/>
+                            <img id="img-license" class="imgId" src="images/vzhi.png">
+                        </label>
+						<p>上传营业执照</p>
+						<div class="pa upDelate">
+							<img src="images/uploaddelate.png" alt="图片：删除" />
+						</div>
+					</div>
+
+					<div class="pr upload">
+						<label>
+                            <input type="file" accept="image/*" class="imgInput"/>
+                            <img id="img-finance" class="imgId" src="images/vv.png">
+                        </label>
+						<p>上传财务报表</p>
+						<div class="pa upDelate">
+							<img src="images/uploaddelate.png" alt="图片：删除" />
+						</div>
+					</div>
+
+					<div class="pr upload">
+						<label>
+                            <input type="file" accept="image/*" class="imgInput"/>
+                            <img id="img-rent" class="imgId" src="images/vzu.png">
+                        </label>
+						<p>上传租房合同</p>
+						<div class="pa upDelate">
+							<img src="images/uploaddelate.png" alt="图片：删除" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- 提交 -->
+		<div class="addbcBtn" id="venueApply">
+			<button>提交</button>
+		</div>
+
+		<script>
+			$(function() {
+
+				mui.init();
+
+				$(document).ready(function() {
+					$.ajax({
+						url: apiUrl + "/Region/area",
+						type: "post",
+						success: function(res) {
+							console.log(res);
+							var loc = "";
+							for(var i = 0; i < res.data.length; i++) {
+								loc += "<li>" + res.data[i].region_name + "</li>";
+							}
+							console.log(loc);
+							$("#counties ul").html(loc);
+						},
+						error: function() {
+							$("#counties ul").text("引入地区失误");
+						}
+					})
+				})
+
+				// 选择
+				$(".pickTypeCover ul li").on("tap", function() {
+					console.log($(this).index());
+					console.log($(this).text());
+					$(this).parents(".addbcIpt").find(".picspecial").text($(this).text());
+					$(this).parents(".addbcIpt").find(".picspecial").css("color", "#333");
+				})
+				$("#counties ul li").click(function() {
+					console.log($(this).text())
+					$("#vCArea").text($(this).text());
+					$("#vCArea").css("color", "#333");
+				})
+
+				// 防止下拉,移动端防止页面滚动代码(兼容苹果和安卓)
+				function touchmove() {
+					document.body.addEventListener('touchmove', function(e) {
+						e.preventDefault();
+					}, {
+						passive: false
+					})
+				};
+
+				// 遮罩层消失之后允许下拉
+				function untouchmove() {
+					document.body.addEventListener('touchmove', function(e) {
+						window.event.returnValue = true;
+					})
+				};
+
+				function touch007() {
+					// 地区选择遮罩部分的滚动及选择赋值
+					var startY = endY = moveY = positionY = pickul_height = position_abs = scroll_h = 0;
+					$(".pickType ul").on("touchstart", function(e) {
+						startY = e.originalEvent.changedTouches[0].pageY;
+						// pickul_height = $(".pickType ul").height() - $(".pickType").height();
+						pickul_height = $(this).height() - $(this).parents(".pickType").height();
+					});
+					$(".pickType ul").on("touchmove", function(e) {
+						endY = e.originalEvent.changedTouches[0].pageY;
+					});
+					$(".pickType ul").on("touchend", function(e) {
+						moveY = endY - startY;
+						scroll_h = Math.abs(positionY) / pickul_height * $(this).parents(".pickType").height();
+						console.log(pickul_height)
+						if(Math.abs(positionY) >= pickul_height) {
+							positionY = -pickul_height;
+							scroll_h = $(this).parents(".pickType").height();
+						} else if(positionY >= 0) {
+							positionY = 0;
+							scroll_h = 0;
+						}
+						$(this).css("top", positionY + "px");
+						$(this).next().css("height", scroll_h + "px");
+						$(".pickType ul li").on("tap", function() {
+							var loc_name = $(this).text();
+							if($(this).parents(".addbcIpt").find(".picspecial").attr("id") == "vunueArea") {
+								loc_name += "天津市"
+							}
+							$(this).parents(".addbcIpt").find(".picspecial").html(loc_name);
+							$(this).parents(".pickTypeCover").hide();
+							console.log($(this).parents(".addbcIpt").find(".picspecial").attr("value", loc_name))
+							console.log($(this).parents(".addbcIpt").find(".picspecial").attr(loc_name))
+							untouchmove(); //遮罩层消失之后允许下拉
+						});
+						positionY += moveY;
+					});
+				}
+
+				$(".pickshow").click(function() {
+					touchmove(); //移动端防止页面滚动代码(兼容苹果和安卓)
+					$(this).next().show();
+					touch007();
+				});
+
+				$(".pickOut").click(function() {
+					// $(".pickTypeCover").hide();
+					untouchmove(); //允许下拉
+					$(this).parents(".pickTypeCover").hide();
+				});
+
+				// 图片的选择及上传
+				$(".imgInput").change(function() {
+					var $file = $(this);
+					var fileObj = $file[0];
+					var windowURL = window.URL || window.webkitURL;
+					var dataURL;
+					var $img = $(this).siblings("img");
+					$img.addClass("imgUpload");
+					$file.parents(".upload").children(".upDelate").show();
+					$file.parents(".upload").children("p").css("color", "#F2F2F2");
+					if(fileObj && fileObj.files && fileObj.files[0]) {
+						dataURL = windowURL.createObjectURL(fileObj.files[0]);
+						$img.attr('src', dataURL);
+					} else {
+						dataURL = $file.val();
+						var imgObj = $file.next();
+						imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+						imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+					}
+				});
+
+				// 点击删除图片则还原
+				$(".upDelate").click(function() {
+					var ind = $(this).parents(".upload").index();
+					$(this).siblings("p").css("color", "#8f8f94");
+					$(this).siblings("label").children("img").attr("src", "images/upload.png");
+					$(this).siblings("label").children("img").removeClass("imgUpload");
+					$(this).hide();
+				});
+
+				// 提交申请
+				$("#venueApply").click(function() {
+					var apply = true;
+					var vtype = "";
+
+					if($("#vType").text() == "企业") {
+						vtype = "01"
+					} else if($("#vType").text() == "个体工商户") {
+						vtype = "06"
+					}
+
+					var ctype = "";
+					if($("#cType").text() == "身份证") {
+						ctype = "0"
+					} else if($("#cType").text() == "护照") {
+						ctype = "1"
+					} else if($("#cType").text() == "军官证") {
+						ctype = "2"
+					} else if($("#cType").text() == "士兵证") {
+						ctype = "3"
+					} else if($("#cType").text() == "港澳台往来通行证") {
+						ctype = "4"
+					} else if($("#cType").text() == "临时身份证") {
+						ctype = "5"
+					} else if($("#cType").text() == "户口簿") {
+						ctype = "6"
+					} else if($("#cType").text() == "其他") {
+						ctype = "7"
+					} else if($("#cType").text() == "警官证") {
+						ctype = "9"
+					} else if($("#cType").text() == "外国人永久居留证") {
+						ctype = "12"
+					} else if($("#cType").text() == "边民出入境通行证") {
+						ctype = "21"
+					}
+
+					var certtype = "";
+					if($("#certType").text() == "全国组织机构代码证书") {
+						certtype = "100"
+					} else if($("#certType").text() == "营业执照") {
+						certtype = "101"
+					} else if($("#certType").text() == "其他") {
+						certtype = "107"
+					} else if($("#certType").text() == "商业登记证") {
+						certtype = "108"
+					} else if($("#certType").text() == "公司注册证") {
+						certtype = "109"
+					}
+
+					//					表单验证
+					if($("#vName").val() == "") {
+						mui.toast("请输入商户名称！");
+						apply = false;
+					}
+
+					if($("#vShortName").val() == "") {
+						mui.toast("请输入商户简称！");
+						apply = false;
+					}
+
+					var vphone = $("#vPhone").val();
+					var teleText = /^1[3456789]\d{9}$/g;
+					if(vphone == '') {
+						mui.toast("请输入商户联系电话！");
+						apply = false;
+					} else if(!(teleText.test(vphone))) {
+						mui.toast("商户联系手机号格式错误，请重新输入！");
+						apply = false;
+					}
+
+					if($("#vEmail").val() == "") {
+						mui.toast("请输入商户邮箱！");
+						apply = false;
+					}
+
+					//                  if($("#ProArea").text() == "请选择"){
+					//                      mui.toast("请选择商户所在省！");
+					//                      apply = false;
+					//                  }
+					//
+					//                  if($("#vCityArea").text() == "请选择"){
+					//                      mui.toast("请选择商户所在市！");
+					//                      apply = false;
+					//                  }
+
+					if($("#vCArea").text() == "请选择") {
+						mui.toast("请选择商户所在区县！");
+						apply = false;
+					}
+
+					if($("#detailAddress").val() == "") {
+						mui.toast("请输入商户详细地址！");
+						apply = false;
+					}
+
+					if($("#postCode").val() == "") {
+						mui.toast("请输入商户邮政编码！");
+						apply = false;
+					}
+
+					if($("#oName").val() == "") {
+						mui.toast("请输入超管姓名！");
+						apply = false;
+					}
+
+					var ophone = $("#oPhone").val();
+					var teleText = /^1[3456789]\d{9}$/g;
+					if(ophone == '') {
+						mui.toast("请输入超管手机号！");
+						apply = false;
+					} else if(!(teleText.test(ophone))) {
+						mui.toast("超管手机号格式错误，请重新输入！");
+						apply = false;
+					}
+
+					if($("#oEmail").val() == "") {
+						mui.toast("请输入超管邮箱！");
+						apply = false;
+					}
+
+					if($("#oIdNum").val() == "") {
+						mui.toast("请输入超管身份证号！");
+						apply = false;
+					}
+
+					if($("#vType").text() == "请选择") {
+						mui.toast("请选择商户类型！");
+						apply = false;
+					}
+
+					if($("#cName").val() == "") {
+						mui.toast("请输入法人或负责人姓名！");
+						apply = false;
+					}
+
+					var cphone = $("#cPhone").val();
+					var teleText = /^1[3456789]\d{9}$/g;
+					if(cphone == '') {
+						mui.toast("请输入法人或负责人手机号！");
+						apply = false;
+					} else if(!(teleText.test(cphone))) {
+						mui.toast("法人或负责人手机号格式错误，请重新输入！");
+						apply = false;
+					}
+
+					if($("#cType").text() == "请选择") {
+						mui.toast("请选择法人或负责人证件类型！");
+						apply = false;
+					}
+
+					if($("#cIdNum").val() == "") {
+						mui.toast("请输入法人或负责人证件号码！");
+						apply = false;
+					}
+
+					if($("#certType").text() == "请选择") {
+						mui.toast("请选择商户注册证件类型！");
+						apply = false;
+					}
+
+					if($("#certNum").val() == "") {
+						mui.toast("请输入商户注册证件号码！");
+						apply = false;
+					}
+
+					if($("#aName").val() == "") {
+						mui.toast("请输入商户绑定银行账户名称！");
+						apply = false;
+					}
+
+					if($("#aBank").val() == "") {
+						mui.toast("请输入开户行！");
+						apply = false;
+					}
+
+					if($("#aSub").val() == "") {
+						mui.toast("请输入开户支行！");
+						apply = false;
+					}
+
+					if($("#aBankNum").val() == "") {
+						mui.toast("请输入开户支行行号！");
+						apply = false;
+					}
+
+					if($("#bankNum").val() == "") {
+						mui.toast("请输入银行卡号！");
+						apply = false;
+					}
+
+					var bphone = $("#bankPhone").val();
+					var teleText = /^1[3456789]\d{9}$/g;
+					if(bphone == '') {
+						mui.toast("请输入银行预留手机号！");
+						apply = false;
+					} else if(!(teleText.test(bphone))) {
+						mui.toast("银行预留手机号格式错误，请重新输入！");
+						apply = false;
+					}
+
+					if(apply) {
+						$.ajax({
+							url: apiUrl + "/VenueApply/addVenueApply",
+							type: "post",
+							data: {
+								app_id: '',
+								outUpperVendorID: '',
+								outVendorID: '',
+								outUserID: '',
+								vendorName: $("#vName").val(),
+								vendorShortName: $("#vShortName").val(),
+								vendorPhone: $("#vPhone").val(),
+								vendorEmail: $("#vEmail").val(),
+								province: $("#ProArea").text(),
+								city: $("#vCityArea").text(),
+								county: $("#vCArea").text(),
+								//                            address: $("#detailAddress").val(),
+								postcode: $("#postCode").val(),
+								operatorName: $("#oName").val(),
+								operatorMobile: $("#oPhone").val(),
+								operatorEmail: $("#oEmail").val(),
+								operatorIdNo: $("#oIdNum").val(),
+								vendorType: vtype,
+								corprateName: $("#cName").val(),
+								corprateMobile: $("#cPhone").val(),
+								corprateIdType: ctype,
+								corprateIdNo: $("#cIdNum").val(),
+								corprateIdPic1: '', //法人/负责人图片key值
+								certType: certtype,
+								certNo: $("#certNum").val(),
+								certPic: '', //商户注册证件图片key值
+								accountName: $("#aName").val(),
+								//                          accountBankProvince: $("#aProArea").val(),
+								//                          accountBankCity: $("#aCityArea").val(),
+								//                          accountBankNm: $("#bank").val(),
+								//                          accountBankName: $("#abank").val(),
+								accountBankProvince: $("#aPro").val(),
+								accountBankCity: $("#aCity").val(),
+								accountBankNm: $("#aBank").val(),
+								accountBankName: $("#aSub").val(),
+
+								accountBankCode: $("#aBankNum").val(),
+								accountNo: $("#bankNum").val(),
+								accountMobile: $("#bankPhone").val(),
+
+								pic_card_face: JSON.stringify($("#img-face").attr("src")),
+								pic_card_fan: JSON.stringify($("#img-fan").attr("src")),
+								pic_license: JSON.stringify($("#img-license").attr("src")),
+								pic_finance: JSON.stringify($("#img-finance").attr("src")),
+								pic_rent: JSON.stringify($("#img-rent").attr("src"))
+							},
+							success: function(res) {
+								console.log(res);
+								console.log(JSON.stringify($("#img-face").attr("src")));
+								console.log(JSON.stringify($("#img-fan").attr("src")));
+								console.log(JSON.stringify($("#img-license").attr("src")));
+								console.log(JSON.stringify($("#img-finance").attr("src")));
+								console.log(JSON.stringify($("#img-rent").attr("src")));
+
+								console.log($("#vName").val());
+								console.log($("#vShortName").val());
+								console.log($("#vPhone").val());
+								console.log($("#vEmail").val());
+								console.log($("#ProArea").text());
+								console.log($("#vCityArea").text());
+								console.log($("#vCArea").text());
+								console.log($("#detailAddress").val());
+								console.log($("#postCode").val());
+								console.log($("#oName").val());
+								console.log($("#oPhone").val());
+								console.log($("#oEmail").val());
+								console.log($("#oIdNum").val());
+								console.log(vtype);
+								console.log($("#cName").val());
+								console.log($("#cPhone").val());
+								console.log(ctype);
+								console.log($("#cIdNum").val());
+								console.log(certtype);
+								console.log($("#certNum").val());
+								console.log($("#aName").val());
+								//                          console.log($("#aProArea").val());
+								//                          console.log($("#aCityArea").val());
+								//                          console.log($("#bank").val());
+								//                          console.log($("#abank").val());
+								console.log($("#aPro").val());
+								console.log($("#aCity").val());
+								console.log($("#aBank").val());
+								console.log($("#aSub").val());
+
+								console.log($("#aBankNum").val());
+								console.log($("#bankNum").val());
+								console.log($("#bankPhone").val());
+							},
+							error: function() {
+								console.log("出错了")
+							}
+						})
+					}
+					// $(location).attr('href', jumpUrl + '/venueApplicationSuc.html');
+				})
+			})
+
+			console.log(jumpUrl);
+		</script>
+	</body>
+
+</html>

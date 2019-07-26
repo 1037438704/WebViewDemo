@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>惠民抢注</title>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+        <!-- <script src="/Public/Home/wap/js/common.js"></script> -->
+        <style>
+            .subscribe{
+                background-color: #3F107E;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>惠民抢注</h2>
+        </div>
+        
+        <!-- 抢注说明 -->
+        <div class="subscribe">
+            <img src="/Public/Home/wap/images/rush.png"/>
+
+            <div class="book">
+                <h1>
+                    <img src="/Public/Home/wap/images/rush-left.png" alt=""/>
+                    惠民卡优惠注册
+                    <img src="/Public/Home/wap/images/rush-right.png" alt=""/>
+                </h1>
+                <h5>1.优惠标准</h5>
+                <p>
+                    这里是一些规则说明，请自己设定。用户使用惠民卡进行场馆预订，累计消费达到500金额，即可获得返现200元，由银行直接打入用户惠民卡账户中。
+                </p>
+                <h5>2.消费金额计算规则</h5>
+                <p>
+                    （1）每人每天使用惠民卡消费金额做记录，如果用户消费>=100元的部分，也只认为用户当天的消费记录为100元，多余消费金额不会列入优惠统计总记录数额。
+                </p>
+                <p>
+                    （2）每人每天在场馆进行消费，只记录前三次的消费金额，如果没满100，那就记录3次总额，如果3次超过100，那只记录100元消费金额，其余超出部分不做记录
+                </p>
+            </div>
+            
+            <div class="book">
+                <h1>
+                    <img src="/Public/Home/wap/images/rush-left.png" alt=""/>
+                    惠民卡抢注规则
+                    <img src="/Public/Home/wap/images/rush-right.png" alt=""/>
+                </h1>
+                <h5>1.抢注资格</h5>
+                <p>
+                    老用户（已经注册过拥有优惠卡的用户），在每年7月-8月内进行当年优惠活动的抢购名额总数为5万人，数量满额后即终止用户抢购。
+                </p>
+                <p>
+                    新用户（未经注册拥有优惠卡的用户），在每年8月开始进行当年优惠活动剩余名额的抢购，数量满额后即终止用户抢购。
+                </p>
+                <h5>2.抢注流程</h5>
+                <p>
+                    登录/注册-绑定一张惠民卡-在此页面点击“立即抢注”
+                </p>
+                <h5>3.注意事项</h5>
+                <p>
+                    抢注期间用户只能使用一张工行惠民卡进行注册。若惠民卡丢失，可以申请新卡，在我的银行卡进行重新绑定。
+                </p>
+                <h5>4.有效期限</h5>
+                <p>
+                    惠民卡使用有效期限从当年的8月1号到明年的7月底为止，有效期为一年。
+                </p>
+            </div>
+        </div>
+
+        <!-- 绑定银行卡才可抢注 -->
+        <div class="pf tc rushBC rushA">
+            <p>绑定银行卡才可抢注</p>
+        </div>
+
+        <!-- 不符合抢注资格 -->
+        <div class="pf tc rushBC rushQ">
+            <p>您未符合抢注资格</p>
+            <p>请阅读抢注说明</p>
+        </div>
+
+        <!-- 未符合今年 -->
+        <div class="pf tc rushCover rushNoQ">
+            <div class="pr rushC">
+                <div class="pa">
+                    <img src="/Public/Home/wap/images/rushD.png" alt="图片：抢注失败"/>
+                </div>
+                <h3>您未符合今年的活动抢注资格</h3>
+                <p>期待明年活动开启您的参与</p>
+                <button>确定</button>
+            </div>
+        </div>
+
+        <!-- 抢注成功 -->
+        <div class="pf tc rushCover rushSuc">
+            <div class="pr rushC">
+                <div class="pa">
+                    <img src="/Public/Home/wap/images/rushSuc.png" alt="图片：抢注失败"/>
+                </div>
+                <h3>恭喜您，抢注成功！</h3>
+                <p>消费金额满500元，即可得到200元返现</p>
+                <button>确定</button>
+            </div>
+        </div>
+
+        <!-- 抢注名额已满 -->
+        <div class="pf tc rushCover rushFull">
+            <div class="pr rushC">
+                <div class="pa">
+                    <img src="/Public/Home/wap/images/rushD.png" alt="图片：抢注失败"/>
+                </div>
+                <h3>今年的活动抢注名额已满</h3>
+                <p>期待明年活动开启您的参与</p>
+                <button>确定</button>
+            </div>
+        </div>
+    </body>
+</html>

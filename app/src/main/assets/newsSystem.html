@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>系统消息</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/wap/css/mui.min.css"/>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+		<script src="__PUBLIC__/Home/wap/js/mui.min.js"></script>
+        <!-- <script src="/Public/Home/wap/js/common.js"></script> -->
+        <style type="text/css">
+        	.mui-table-view:before{
+            	height: 0;
+            }
+            .mui-table-view:after{
+            	height: 0;
+            }
+            .paddingTop{
+            	padding-top: 4rem!important;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>系统消息</h2>
+        </div>
+
+        <!-- 系统消息 -->
+        <div class="paddingTop newsCenter newsSys">
+            <ul>
+                
+            </ul>
+        </div>
+
+        <script>
+            function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/newsSystem.html?msgId=12786&token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    msgId = theRequest.msgId
+                    token = theRequest.token
+                }
+                return theRequest;
+            }
+            var msgId = GetRequest().msgId;
+            var token = GetRequest().token;
+        	console.log(msgId);
+            console.log(token);
+
+
+            $.ajax({
+                url: apiUrl + "/Msg/msgInfo",
+                type: "post",
+                data: {
+                    id: msgId
+                },
+                success: function(res){
+                	console.log(res);
+                    var res = [res.data];
+                    var news_sys = "";
+                    
+                    for(var i = 0;i < res.length;i ++){
+                        news_sys += "<li><h3>" +
+                            res[i].msg_title + "</h3><p>" +
+                            res[i].msg_content +"</p></li>";
+                    };
+//                  console.log(news_sys)
+                    $(".newsSys ul").html(news_sys);
+                },
+                error: function(res){
+                    console.log(res);
+                }
+            })
+
+           	$.ajax({
+               	url: apiUrl + "/Msg/readMsg",
+               	type: "post",
+               	data: {
+                    id: msgId,
+                    token: token
+                },
+                success: function(res){
+                    console.log(res);
+//                  mui.toast("读取消息接口" + res.message);
+                },
+                error: function(res){
+                    mui.toast("出错了，请重试！");
+                }
+           	})
+
+        </script>
+
+    </body>
+</html>

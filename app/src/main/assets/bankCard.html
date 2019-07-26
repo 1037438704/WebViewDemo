@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>我的银行卡</title>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+        <!--<script src="__PUBLIC__/Home/wap/js/jquery.min.js"></script>-->
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>我的银行卡</h2>
+        </div>
+
+        <!-- 添加银行卡 -->
+        <div class="paddingTop bankCard">
+            <a href="javascript:void(0);" style="display: inline-block;">
+                <img src="/Public/Home/wap/images/addbankcard.png"/>
+            </a>
+            
+            <p>添加银行卡</p>
+            
+        </div>
+
+		<script type="text/javascript">
+			console.log(jumpUrl);
+			
+			function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/addBankCard.html?token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    token = theRequest.token
+                }
+                return theRequest;
+            }
+            var token = GetRequest().token;
+            console.log(token);
+            
+            
+            
+            $(".bankCard a img").click(function (){
+            	$(location).attr('href',jumpUrl + '/addBankCard.html?token=' + token);
+            });
+		</script>
+    </body>
+</html>

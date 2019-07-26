@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>关于我们</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Home/wap/css/mui.min.css"/>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+		<script src="/Public/Home/wap/js/mui.min.js"></script>
+        <style>
+            body{
+                background-color: #fff;
+            }
+            .bottomBtn{
+                color: #B7B7B7;
+                font-size: 1.2rem;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>关于我们</h2>
+        </div>
+
+        <!-- 关于我们 -->
+        <div class="tc about">
+            <img src="/Public/Home/wap/images/logo-aboutus.png"/>
+            <h3>体育惠民</h3>
+            <p>版本号：v <span>1.0.1</span></p>
+        </div>
+
+        <!-- 版权声明 -->
+        <div class="pf tc copyright">
+            Copyright©2019-2029 体育惠民 版权所有
+        </div>
+
+        <script>
+            $.ajax({
+                url: apiUrl + "/ActionSet/getVersion",
+                type: "get",
+                data: {
+
+                },
+                success: function(res){
+                	console.log(res);
+                	if(res.code == 1){
+                    	$(".about span").html(res.data);
+                   	}else{
+                   		mui.toast(res.message);
+                   	}
+                },
+                error: function(){
+                    mui.toast("出错了，请重试！");
+                }
+            });
+        </script>
+
+    </body>
+</html>

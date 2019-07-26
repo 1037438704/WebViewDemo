@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>消费记录</title>
+        <link rel="stylesheet" href="/Public/Home/wap/css/mui.min.css" />
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+        <script src="/Public/Home/wap/js/mui.min.js"></script>
+        <!-- <script src="/Public/Home/wap/js/common.js"></script> -->
+        <style>
+            body{
+                background-color: #F2F2F2;
+            }
+            .mui-scroll-wrapper{
+                margin-top: 5rem;
+                background-color: #fff;
+            }
+            .consumeList{
+                padding-top: 3rem;
+            }
+            .mui-pull-caption{
+                z-index: 999;
+            }
+            /* .mui-icon-pulldown:before{
+                content: "";
+            } */
+
+            /*.mui-pull-bottom-pocket, .mui-pull-top-pocket{
+                visibility: visible;
+            }*/
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>消费记录</h2>
+        </div>
+
+        <!-- 分隔 -->
+        <div class="separate"></div>
+
+        <!-- 消费记录 -->
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <div class="consumeList">
+                    <ul>
+                        
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/feedback.html?token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    token = theRequest.token
+                }
+                return theRequest;
+            }
+            var token = GetRequest().token;
+            console.log(token);
+
+
+            mui.init({
+                pullRefresh : {
+                    container: "#pullrefresh",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+                    down : {
+                        auto: false,//可选,默认false.首次加载自动上拉刷新一次
+                        callback :callfunction //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                    },
+                    up : {
+                        auto: true,                              //可选,默认false.自动上拉加载一次
+                        callback: pullfresh                      //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                    }
+                }
+            });
+                    
+            function callfunction() {
+                setTimeout(function(){
+                	//定时器，提升用户体验
+                    // 实现更新页面的操作，一般上就是ajax请求数据，页面动态加载元素
+
+                    mui.toast('列表已刷新');
+                    mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //完成下拉刷新
+             	},1500);
+            }
+
+            var pullfresh_add = 0;
+            function pullfresh(){
+                setTimeout(function(){                 //定时器，提升用户体验
+                    
+
+                    pullfresh_add += 1;
+                    console.log("上拉加载第" + pullfresh_add + "次");
+
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //完成上拉加载
+                }, 1500)
+            }
+            
+            $(function(){
+                $.ajax({
+                    url: apiUrl + "/OrderLog/orderLogList",
+                    type: "post",
+                    data: {
+                        token: token
+                    },
+                    success: function(res){
+                        console.log(res)
+                        if(res.code == 1){
+//                          console.log(res)
+							if(res.message == '暂无数据'){
+                        		var list = "<p style='text-align: center;padding-top: 3rem;'>暂无数据</p>";
+                        	}else{
+								var list = "";
+	                            for(var i = 0;i < res.data.length;i ++){
+	                                list += "<li><div class='pa'>-" + res.data[i].money + "</div><h4>" + res.data[i].name + 
+	                                    "</h4><p><span class='time'>" + res.data[i].create_time + 
+	                                    "</span><span class='tailNum'>银行卡尾号：" + res.data[i].card_bank.substr(-4) + "</span></p></li>";
+	                            }
+							}
+                            
+                            // console.log(list)
+                            $(".consumeList ul").html(list);
+                            $(".mui-scroll").css("transform",'translate3d(0px, 0px, 0px) translateZ(0px)');
+                        }else{
+                            mui.toast(res.message);
+                        }
+                    },
+                    error: function(){
+                        mui.toast("出错了，请重试！");
+                    }
+                })
+                
+            })
+        </script>
+
+    </body>
+</html>

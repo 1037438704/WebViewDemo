@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>换绑银行卡</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Home/wap/css/mui.min.css"/>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+		<script src="/Public/Home/wap/js/mui.min.js"></script>
+        <script src="/Public/Home/wap/js/common.js"></script>
+        <style>
+            .addbcIpt input{
+                margin-bottom: 0;
+                padding: 0;
+                height: auto;
+                border: none;
+                color: #9B9B9B;
+            }
+            .addbcMid .pr>.pa{
+                display: block;
+            }
+            .IdType{
+                color: #9B9B9B;
+            }
+            .bottomBtn{
+                margin-top: 10rem;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>换绑银行卡</h2>
+        </div>
+
+        <!-- 换绑银行卡 -->
+        <div class="addbc">
+            <div class="addbcTop">
+                <div class="fl addbcImg">
+                    <img src="/Public/Home/wap/images/addbc.png"/>
+                </div>
+                
+                <div class="fl">
+                    只有绑定工行惠民卡才可参与惠民抢注活动<br/>
+                    身份证一经绑定不可修改
+                </div>
+    
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="addbcMid">
+                <div class="addbcIpt">
+                    <div class="fr">
+                        <input type="text" placeholder="" value="" id="realname"/>
+                    </div>
+                    
+                    真实姓名
+
+                    <div class="clearfix"></div>
+                </div>
+
+				<!--<div class="addbcIpt">
+                    <div class="fr">
+                        <input type="text" placeholder="请输入微信号" id="wxname"/>
+                    </div>
+                    
+                    微信号
+
+                    <div class="clearfix"></div>
+                </div>-->
+                
+                <div class="pr addbcIpt">
+                    <div class="pa" id="pickIdType">
+                        <span class="IdType">身份证</span> <img src="/Public/Home/wap/images/right.png"/>
+                    </div>
+
+                    证件类型
+                </div>
+
+                <!-- 选择证件类型 -->
+                <div class="pf tl pickTypeCover">
+                    <div class="pa pickType">
+                        <h3>选择证件类型</h3>
+                        <ul>
+                            <li>身份证</li>
+                            <li>军官证</li>
+                            <li>护照</li>
+                            <li>港澳证</li>
+                            <li>台胞证</li>
+                            <li>警官证</li>
+                            <li>士兵证</li>
+                            <li>其他证件</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--<div class="addbcIpt">
+                    <div class="fr">
+                        <input type="text" value="身份证"/>
+                    </div>
+                    
+                    证件类型
+
+                    <div class="clearfix"></div>
+                </div>-->
+
+                <div class="addbcIpt">
+                    <div class="fr">
+                        <input type="text" placeholder="" value="" id="idnum"/>
+                    </div>
+                    
+                    证件号码
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="addbcMid">
+                <div class="addbcIpt">
+                    <div class="fr">
+                        <input type="number" pattern="[0-9]*" placeholder="请输入银行卡号" id="cardnum"/>
+                    </div>
+                    
+                    银行卡号
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="addbcIpt">
+                    <div class="fr">
+                        <input type="number" pattern="[0-9]*" placeholder="请输入银行预留手机号" id="phonenum"/>
+                    </div>
+                    
+                    预留手机号
+
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- 确认 -->
+        <div class="bottomBtn">
+            <p>
+                <img src="/Public/Home/wap/images/agree.png"/>
+                已阅读并同意
+                <a href="">《中国工商银行绑卡协议》</a>
+            </p>
+            <div class="addbcBtn">
+                <button>确认绑定</button>
+            </div>
+            
+        </div>
+        
+        <script type="text/javascript">
+        	console.log(jumpUrl);
+        	
+            function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/feedback.html?token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    token = theRequest.token
+                }
+                return theRequest;
+            }
+            var token = GetRequest().token;
+            console.log(token);
+            
+            $.ajax({
+                url: apiUrl + "/Bank/unbindBankPage",
+                type: "post",
+                data: {
+                    token: token,//用户token
+                    bind_card: $("#cardnum").val(),//卡号
+                    mobile_no: $("#phonenum").val(),//手机号
+                },
+                success: function(res){
+                    console.log(res);
+                    if(res.code == 1){
+                        $("#realname").val(res.data.name);
+						
+						var IDTYPE = res.data.identity_type;
+						if(IDTYPE == 1){
+							$(".IdType").text("身份证");
+						}else if(IDTYPE == 2){
+							$(".IdType").text("军官证");
+						}else if(IDTYPE == 3){
+							$(".IdType").text("护照");
+						}else if(IDTYPE == 4){
+							$(".IdType").text("港澳证");
+						}else if(IDTYPE == 5){
+							$(".IdType").text("台胞证");
+						}else if(IDTYPE == 6){
+							$(".IdType").text("警官证 ");
+						}else if(IDTYPE == 7){
+							$(".IdType").text("士兵证 ");
+						}else if(IDTYPE == 8){
+							$(".IdType").text("其他证件");
+						}
+						
+						var IDNum = res.data.ident_num;
+						IDNum = IDNum.substr(0,3) + '***********' + IDNum.substr(-4);
+						$("#idnum").val(IDNum);
+						
+                    }else{
+                        mui.toast(res.message);
+                    }
+                },
+                error: function () {
+                    mui.toast("网络出错了，请重试！");
+                }
+            })
+        	
+        	$(".addbcBtn button").click(function(){
+                var qualified = true;
+                if($("#cardnum").val() == ''){
+                    mui.toast("请输入银行卡号！");
+                    qualified = false;
+                }
+
+//              if($("#idnum").val() == ''){
+//                  mui.toast("请输入证件号码！");
+//                  qualified = false;
+//              }
+
+//              if($("#realname").val() == ''){
+//                  mui.toast("请输入真实姓名！");
+//                  qualified = false;
+//              }
+                
+//              if($("#wxname").val() == ''){
+//                  mui.toast("请输入微信号！");
+//                  qualified = false;
+//              }
+
+//              if($(".IdType").text() == '请选择'){
+//                  mui.toast("请选择证件类型！");
+//                  qualified = false;
+//              }
+
+                var phone = $("#phonenum").val();
+                var teleText = /^1[3456789]\d{9}$/g;
+                if(phone == ''){
+                    mui.toast("请输入手机号！");
+                    qualified = false;
+                }else if(!(teleText.test(phone))){
+                    mui.toast("手机号格式错误，请重新输入！");
+                    qualified = false;
+                }
+
+                if(qualified){
+                    $.ajax({
+                        url: apiUrl + "/Bank/bindBank",
+                        type: "post",
+                        data: {
+                            token: token,//用户token
+                            //weixin: $("#wxname").val(),//微信号
+                            bind_card: $("#cardnum").val(),//卡号
+                            cert_no: $("#idnum").val(),//证件号
+                            mobile_no: $("#phonenum").val(),//手机号
+                            cert_type: $(".IdType").text(),//证件类型
+                            type: 2,//1绑定 2换绑
+                            cust_name: $("#realname").val() //真实姓名
+                        },
+                        success: function(res){
+                            console.log(res);
+                            if(res.code == 1){
+                                mui.toast("换绑成功！");
+								setTimeout(function(){
+									$(location).attr('href', jumpUrl + '/bankCardList.html?token=' + token);
+								},500);
+                            }else{
+                                mui.toast(res.message);
+                            }
+                        },
+                        error: function () {
+                            mui.toast("网络出错了，请重试！");
+                        }
+                    })
+
+					
+                }
+            })
+        	
+        </script>
+    </body>
+</html>

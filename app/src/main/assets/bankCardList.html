@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>我的银行卡列表</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Home/wap/css/mui.min.css"/>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+		<script src="/Public/Home/wap/js/mui.min.js"></script>
+        <style type="text/css">
+        	.bankCardList ul li .pa{
+        		top: 1rem;
+        	}
+        	.bankCardList ul li .pa{
+        		width: calc(100% - 1.5rem);
+        	}
+        	.bankCardList ul li .listR{
+        		width: calc(100% - 4rem);
+        		margin-top: -0.5rem;
+        	}
+        	.bankCardList ul li p{
+        		letter-spacing: 0;
+        	}
+        	.bankCardList ul li p span{
+        		font-size: 2.4rem;
+        	}
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>我的银行卡</h2>
+        </div>
+
+        <!-- 银行卡列表 -->
+        <div class="paddingTop bankCardList">
+            <ul>
+                <li>
+                    <img src="/Public/Home/wap/images/bankcardbg.png"/>
+                    <div class="pa">
+                        <div class="fl bankLogo">
+                            <img src="/Public/Home/wap/images/icbcLOGO.png"/>
+                        </div>
+
+                        <div class="fl listR">
+                            <h3>中国工商银行</h3>
+                            <p>**** **** **** <span>5658</span></p>
+                        </div>
+                    </div>
+                </li>
+                <!--<li>
+                    <img src="/Public/Home/wap/images/bankcardbg.png"/>
+                    <div class="pa">
+                        <div class="fl bankLogo">
+                            <img src="/Public/Home/wap/images/icbcLOGO.png"/>
+                        </div>
+
+                        <div class="fl">
+                            <h3>中国工商银行</h3>
+                            <p>**** **** **** 5658</p>
+                        </div>
+                    </div>
+                </li>-->
+            </ul>
+            
+            <p>卡片丢失？ <a href="changeBankCard.html">立即换绑</a></p>
+        </div>
+
+		<script>
+        	console.log(jumpUrl);
+        	
+			function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/bankCardList.html?token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    token = theRequest.token
+                }
+                return theRequest;
+            }
+            var token = GetRequest().token;
+            console.log(token);
+            
+            $(".bankCardList a").attr("href",jumpUrl + "/changeBankCard.html?token=" + token)
+            
+			$.ajax({
+                url: apiUrl + "/Member/myBank",
+                type: "post",
+                data: {
+					token: token
+                },
+                success: function(res){
+                	console.log(res);
+                	if(res.code == 1){
+                		var bcnum = res.data.card_bank;
+                		$(".listR p span").text(bcnum.substr(-4));
+                		console.log(bcnum.substr(-4));
+                   	}else{
+                   		mui.toast(res.message);
+                   	}
+                },
+                error: function(){
+                    mui.toast("出错了，请重试！");
+                }
+            });
+		</script>
+    </body>
+</html>

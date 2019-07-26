@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>消息列表</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/wap/css/mui.min.css"/>
+        <link rel="stylesheet" href="__PUBLIC__/Home/wap/css/common.css" />
+        <script src="__PUBLIC__/Home/wap/js/jquery.min.js"></script>
+		<script src="__PUBLIC__/Home/wap/js/mui.min.js"></script>
+        <!-- <script src="__PUBLIC__/Home/wap/js/common.js"></script> -->
+        <style>
+            #refreshContainer{
+                overflow: auto;
+            }
+            .newsCenter ul{
+                background-color: transparent;
+            }
+            .newsCenter ul li{
+                margin-bottom: 1rem;
+                border-radius: 0.5rem;
+                background-color: #fff;
+            }
+            .newsCenter .pr .pa{
+                right: 0;
+                top: -0.5rem;
+            }
+            .mui-table-view:before{
+            	height: 0;
+            }
+            .mui-table-view:after{
+            	height: 0;
+            }
+            .paddingTop{
+            	padding-top: 4rem!important;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>消息中心</h2>
+        </div>
+
+        <!-- 消息中心 -->
+        <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll paddingTop newsCenter">
+	            <ul class="mui-table-view mui-table-view-chevron">
+	                
+	            </ul>
+            </div>
+        </div>
+
+        <script>
+        	var url = '__URL__';
+            // 消息类型1系统 2订单
+
+        	console.log(jumpUrl);
+            
+            function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/newsCenter.html?type=1&token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    token = theRequest.token
+                    type = theRequest.type
+                }
+                return theRequest;
+            }
+            var token = GetRequest().token;
+            var type = GetRequest().type;
+            console.log(token);
+        	console.log(type);
+
+            if(type == 1){
+                $(".top h2").text("系统消息");
+            }else{
+                $(".top h2").text("订单消息");
+            }
+            
+            var page = 1;
+            var news_center ="";
+            var ids = [];
+            var list = [];
+            var isNo = [];
+
+            mui.init({
+                pullRefresh : {
+                    container:"#refreshContainer",//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+                    up : {
+                        height: 50,//可选.默认50.触发上拉加载拖动距离
+                        auto: true,//可选,默认false.自动上拉加载一次
+                        contentrefresh: "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                        contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                        callback : newslist//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                    }
+                }
+            });
+            
+            function getlist() { 
+                console.log(page)
+                $.ajax({
+                    url: apiUrl + "/Msg/msgList",
+                    type: "post",
+                    data: {
+                        msg_type: type,
+                        token: token,
+                        page: page
+                    },
+                    success: function(res){
+                        // console.log(res);
+                        if(res.code == 1){
+                        	list = list.concat(res.data)
+                        	console.log(res.data);
+                            if(res.data == ""){
+                                if(ids.length == 0){
+                                    news_center = "<li><p class='tc' style='font-size: 1.5rem;'>暂无数据</p></li>";
+                                }else{
+                                    if($(".newsCenter ul li:last").children(".tc").length == 0){
+                                        news_center += "<li><p class='tc' style='font-size: 1.5rem;'>没有更多数据</p></li>";
+                                    }
+                                }
+                            }else{
+                            	if(res.data.length < 10){
+                            		window.stop = true
+                            	}else{
+                            		window.stop = false
+                            	}
+                            	for(var i = 0;i < res.data.length;i ++){
+	                                ids.push(res.data[i].id);
+                                    isNo.push(res.data[i].view);// 是否已读 1未读 2 已读
+                                    if(res.data[i].view == 1){
+                                        var view = 'block';
+                                    }else{
+                                        var view = 'none';
+                                    }
+	                                var date1 = res.data[i].create_time.split(" ")[0].split("-");
+	                                date1 = date1[0] + '/' + date1[1] + '/' + date1[2];
+	                                news_center += "<li><div class='fl pr newsImg'>" + 
+	                                    "<img src='__PUBLIC__/Home/wap/images/news.png' alt='图片：消息中心'/><div class='pa' style='display: "+ view + ";'>" +
+	                                    "<img src='__PUBLIC__/Home/wap/images/newsred.png' alt='新消息'/></div></div><div class='fl'><h4>" +
+	                                    res.data[i].msg_title + "</h4><p>"+
+	                                    res.data[i].msg_content + "</p></div><div class='pa'>"+
+	                                    date1 + "</div><div class='clearfix'></div></li>";
+	                            }
+                                console.log(isNo);
+                            }
+                            $(".newsCenter ul").html(news_center);
+
+                            $(".newsCenter ul li").on("tap",function(){
+                                var msg_index = $(this).index();
+                                var msgId = ids[msg_index]
+
+                                $(location).attr('href', jumpUrl + '/newsSystem.html?msgId=' + msgId + '&token=' + token);
+                            });
+                        }else{
+                            mui.toast(res.message);
+                        }
+                    },
+                    error: function(){
+                        mui.toast("出错了，请重试！");
+                    }
+                })
+
+
+            }
+
+            function newslist(){
+
+                getlist(); 
+                mui('#refreshContainer').pullRefresh().endPullupToRefresh(); //完成刷新
+                page += 1;
+                
+                
+            }
+        </script>
+
+    </body>
+</html>

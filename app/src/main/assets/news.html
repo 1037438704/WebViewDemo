@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>消息中心</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/wap/css/mui.min.css"/>
+        <link rel="stylesheet" href="__PUBLIC__/Home/wap/css/common.css" />
+        <script src="__PUBLIC__/Home/wap/js/jquery.min.js"></script>
+		<script src="__PUBLIC__/Home/wap/js/mui.min.js"></script>
+        <!-- <script src="__PUBLIC__/Home/wap/js/common.js"></script> -->
+        <style>
+            .newsCenter ul{
+                background-color: transparent;
+            }
+            .newsCenter ul li{
+                margin-bottom: 1rem;
+                border-radius: 0.5rem;
+                background-color: #fff;
+            }
+            .newsCenter .pr .pa{
+                right: 0;
+                top: -0.5rem;
+            }
+            .mui-table-view:before{
+            	height: 0;
+            }
+            .mui-table-view:after{
+            	height: 0;
+            }
+            .newsImg .pa{
+                display: none;
+            }
+            .paddingTop{
+            	padding-top: 4rem!important;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>消息中心</h2>
+        </div>
+
+        <!-- 消息中心 -->
+        <div class="paddingTop newsCenter">
+            <!--数据列表-->
+            <ul>
+                <li>
+                    <div class="fl pr newsImg">
+                        <img src="__PUBLIC__/Home/wap/images/news.png" alt="图片：消息中心"/>
+                        <div class="pa">
+                            <img src="__PUBLIC__/Home/wap/images/newsred.png" alt="新消息"/>
+                        </div>
+                    </div>
+
+                    <div class="fl">
+                        <h4>
+                            系统消息
+                        </h4>
+                        <p>
+                            <!--您的优惠额度已满500元！-->
+                        </p>
+                    </div>
+
+                    <div class="pa">
+                        <!--2019/03/18-->
+                    </div>
+
+                    <div class="clearfix"></div>
+                </li>
+
+                <li>
+
+                    <div class="fl pr newsImg">
+                        <img src="__PUBLIC__/Home/wap/images/news.png" alt="图片：消息中心"/>
+                        <div class="pa">
+                            <img src="__PUBLIC__/Home/wap/images/newsred.png" alt="新消息"/>
+                        </div>
+                    </div>
+
+                    <div class="fl">
+                        <h4>
+                        	订单消息
+                        </h4>
+                        <p>
+                            <!--您的优惠额度已满500元！-->
+                        </p>
+                    </div>
+
+                    <div class="pa">
+                        <!--2019/03/18-->
+                    </div>
+
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+        </div>
+
+        <script>
+        	var url = '__URL__';
+        	
+        	console.log(jumpUrl);
+        	
+        	function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/news.html?token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    token = theRequest.token
+                }
+                return theRequest;
+            }
+            var token = GetRequest().token;
+            console.log(token);
+        	
+            
+            var unread = function(type){
+                $.ajax({
+                    url: apiUrl + "/Msg/isHasNoView",
+                    type: "post",
+                    data: {
+                        token: token,
+                        msg_type: type//2订单类型 1系统类型
+                    },
+                    success: function(res){
+                        console.log(res)
+                        //   1有 2 没有
+                        var ee = type - 1;
+                        if(res.code == 1){
+                            
+                            if(res.data.have == 1){
+                                console.log( ee + '有');
+                                // 有未读消息
+                                $(".newsImg .pa").eq(ee).show();
+                            }
+                            
+                        }else{
+                            mui.toast(res.message);
+                        }
+                    },
+                    error: function(){
+                        mui.toast("出错了，请重试！");
+                    }
+                })
+            
+            }
+
+            var fresh = function(type,ind){
+                $.ajax({
+                    url: apiUrl + "/Msg/msgList",
+                    type: "post",
+                    data: {
+                        msg_type: type,
+                        token: token,
+                        page: 1
+                    },
+                    success: function(res){
+                        console.log(res.data[0]);
+                        var hh = '';
+                        if(type == 1){
+                            hh = '系统消息';
+                        }else{
+                            hh = '订单消息';
+                        }
+                        if(res.code == 1){
+                            if(res.data[0] == "" || res.data[0] == undefined){
+                                var sys = "<div class='fl pr newsImg'><img src='__PUBLIC__/Home/wap/images/news.png' alt='图片：消息中心'/>" + 
+                                "<div class='pa'><img src='__PUBLIC__/Home/wap/images/newsred.png' alt='新消息'/></div></div>" + 
+                                "<div class='fl'><h4>" + hh + "</h4><p>" + '暂无消息' + 
+                                "</p></div><div class='pa'>" + '' + "</div><div class='clearfix'></div>";
+                            }else{
+                                var date = res.data[0].create_time.split(" ")[0].split("-");
+                                date = date[0] + '/' + date[1] + '/' + date[2];
+                                var sys = "<div class='fl pr newsImg'><img src='__PUBLIC__/Home/wap/images/news.png' alt='图片：消息中心'/>" + 
+                                    "<div class='pa'><img src='__PUBLIC__/Home/wap/images/newsred.png' alt='新消息'/></div></div>" + 
+                                    "<div class='fl'><h4>" + hh + "</h4><p>" + res.data[0].msg_content + 
+                                    "</p></div><div class='pa'>" + date + "</div><div class='clearfix'></div>";
+                            }
+                            $(".newsCenter ul li").eq(ind).html(sys);
+                        }else{
+                            mui.toast(res.message);
+                        }
+                    },
+                    error: function(){
+                        mui.toast("出错了，请重试！");
+                    }
+                })
+            }
+
+            
+            $(".newsCenter ul li").on("tap",function(){
+                var type = $(this).index() + 1;
+                $(location).attr('href', jumpUrl + '/newsCenter.html?type=' + type + '&token=' + token);
+            })
+
+            $(document).ready(function(){
+
+                // 最新消息
+                fresh(1,0);// 系统消息
+                fresh(2,1);// 订单消息
+            	
+                // 是否有已读消息
+                unread(1);
+                unread(2);
+            })
+        </script>
+
+    </body>
+</html>

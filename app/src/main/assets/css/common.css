@@ -1,0 +1,902 @@
+/*默认样式*/
+
+html,
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	box-sizing: border-box;
+	font-size: 1.4rem;
+}
+
+/* 任何触摸事件都不会产生默认行为 */
+/**{*/
+	/*touch-action: none;*/
+/*}*/
+
+
+/* html{
+   font-size:62.5%(10/16*100%);
+} */
+
+html{
+    font-size: 62.5%;
+}
+
+body {
+	font-family: PingFangSC-Regular;
+	color: #333;
+    font-size: 100% !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+a:link{
+	color: #000;
+}
+table {
+	border-collapse: collapse;
+	table-layout: automatic;
+}
+
+input,
+textarea {
+	outline: none;
+	border: none;
+}
+
+textarea {
+	resize: none;
+	overflow: auto;
+}
+
+input {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	border: none;
+	outline: none;
+}
+
+
+/*ie下子元素浮动时候父元素不随着自动扩大的问题*/
+
+.clearfix {
+	clear: both;
+	zoom: 1;
+}
+
+
+/*清除浮动*/
+
+.clearfix:after {
+	content: ".";
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
+	overflow: hidden;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.tl {
+	text-align: left;
+}
+
+.tc {
+	text-align: center;
+}
+
+.tr {
+	text-align: right;
+}
+
+.ellipse {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.inline {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+
+.pr {
+	position: relative;
+}
+
+.pa {
+	position: absolute;
+}
+
+.pf {
+	position: fixed;
+}
+
+.none {
+	display: none;
+}
+
+button{
+    border: none;
+    outline: none;
+}
+/*默认样式*/
+
+
+/* 页面背景色 */
+body{
+    background-color: #F2F2F2;
+}
+
+/* 顶部 */
+.top{
+    width: 100%;
+    background: #fff;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    z-index: 499;
+}
+.top h2{
+    font-size: 1.8rem;
+    line-height: 4rem;
+}
+
+/* 避开顶部 */
+.paddingTop{
+    padding-top: 6rem !important;
+}
+
+/* 分隔 */
+.separate{
+    background-color: #F2F2F2;
+    padding-top: 5rem;
+}
+
+/* 确认按钮 */
+.bottomBtn{
+	margin: 15rem 0 2rem;
+    text-align: center;
+}
+.addbcBtn{
+    padding: 0 1rem;
+}
+.addbcBtn button{
+    width: 100%;
+    font-size: 1.7rem;
+    color: #fff;
+    line-height: 4rem;
+    border-radius: 2rem;
+    background-color: #FA3F3F;
+}
+
+
+
+
+/* 关于我们 */
+.about{
+    padding-top: 7rem;
+}
+.about img{
+    display: inline-block;
+    width: 9rem;
+    margin-bottom: 1rem;
+}
+.about h3{
+    font-size: 2rem;
+    font-weight: 600;
+}
+.about p{
+    font-size: 1.6rem;
+    color: #737373;
+    line-height: 2.6rem;
+}
+.copyright{
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    color: #9A9A9A;
+    font-size: 1.2rem;
+}
+
+
+
+/* 绑定银行卡 */
+.addbc{
+    padding: 6rem 1rem 0;
+}
+.addbcTop{
+    padding: 0.5rem 0;
+    color: #FA6262;
+    background-color: #F4EAEA;
+}
+.addbcImg img{
+    width: 1.6rem;
+    margin: 0 1rem;
+}
+.addbcTop fl{
+    line-height: 1.5rem;
+}
+.addbcMid{
+    background-color: #fff;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+.addbcIpt{
+    font-size: 1.5rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+.addbcIpt input{
+    display: inline-block;
+    color: #333;
+    font-size: 1.5rem;
+    width: 16rem;
+    text-align: right;
+}
+.addbcIpt input::-webkit-input-placeholder{
+    color: #9E9E9E;
+    font-size: 1.5rem;
+    text-align: right;
+}
+.addbcIpt input:-moz-placeholder{
+    color: #9E9E9E;
+    font-size: 1.5rem;
+    text-align: right;
+}   
+.addbcIpt input::-moz-placeholder{
+    color: #9E9E9E;
+    font-size: 1.5rem;
+    text-align: right;
+}
+.addbcIpt input:-ms-input-placeholder{
+    color: #9E9E9E;
+    font-size: 1.6rem;
+    text-align: right;
+} 
+.addbcMid .pr>.pa{
+    right: 0.5rem;
+    top: 0.1rem;
+    display: none;
+    padding: 1.2rem 0;
+}
+.addbcMid .pr .pa span{
+    font-size: 1.6rem;
+}
+.bottomBtn img{
+    vertical-align: middle;
+    width: 1.5rem;
+    margin-right: 0.5rem;
+}
+.bottomBtn p{
+    color: #7C7C7C;
+    padding: 1rem 0;
+}
+.bottomBtn a{
+    color: #F94E4E;
+}
+/* 选择证件类型 */
+.pickTypeCover{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    zoom: 1;
+    display: none;
+}
+.pickType{
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    line-height: 4rem;
+    background-color: #fff;
+}
+.pickType h3{
+    font-size: 1.5rem;
+    padding: 0 1.2rem;
+    font-weight: 600;
+    border-bottom: 1px solid #F4F4F4;
+}
+.pickType ul li{
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+
+
+/* 绑定银行卡成功 */
+.sucImg{
+    text-align: center;
+    padding-bottom: 5rem;
+}
+.sucImg img{
+    width: 7rem;
+    display: inline-block;
+    margin: 8rem auto 2rem;
+}
+.sucImg p{
+    font-size: 1.8rem;
+    font-weight: 600;
+    /* color: #333333 */
+}
+
+
+
+/* 我的银行卡 */
+.bankCard{
+    text-align: center;
+}
+.bankCard img{
+    width: 4rem;
+    margin: 1rem auto;
+}
+.bankCard p{
+    color: #717171;
+    font-size: 1.6rem;
+}
+
+
+
+/* 银行卡列表 */
+.bankCardList ul{
+    padding: 1.5rem;
+    color: #fff;
+}
+.bankCardList ul img{
+    width: 100%;
+}
+.bankCardList ul li{
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-bottom: 1rem;
+}
+.bankCardList ul li .pa{
+    top: 1.5rem;
+    left: 1.5rem;
+}
+.bankCardList ul li h3{
+    font-size: 1.8rem;
+    line-height: 3rem;
+}
+.bankCardList ul li p{
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 4rem;
+    letter-spacing: .1rem;
+}
+.bankLogo{
+    width: 3rem;
+    margin-right: 1rem;
+}
+.bankCardList>p{
+    text-align: center;
+    color: #A2A2A2;
+    font-size: 1.5rem;
+}
+.bankCardList p a{
+    color: #FA4B4B;
+}
+
+
+
+/* 换绑银行卡 */
+
+
+
+/* 消费记录 */
+.consumeList{
+    height: 100%;
+}
+.consumeList ul{
+    height: 100%;
+    background-color: #fff;
+    padding: 0 1.5rem;
+}
+.consumeList li{
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 6rem;
+    border-bottom: 1px solid #F2F2F2;
+}
+.consumeList li:nth-child(3n+1){
+    border-bottom: 1px solid #F5F5F5;
+}
+.consumeList li:nth-child(3n){
+    border-bottom: 1px solid #EAEAEA;
+}
+.consumeList li .pa{
+    right: 0;
+    top: 0;
+    line-height: 6rem;
+    color: #545454;
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+.consumeList li h4{
+    color: #676767;
+    line-height: 3rem
+}
+.consumeList li p{
+    color: #A4A4A4;
+}
+.consumeList .time{
+    letter-spacing: 0.1rem;
+}
+.consumeList .tailNum{
+    padding-left: 1.5rem;
+}
+
+
+
+/* 意见反馈 */
+.feedback{
+    padding: 6rem 1rem 0;
+}
+
+.feedback textarea{
+    width: 100%;
+    min-height: 18rem;
+    max-height: 30rem;
+    font-size: 2rem;
+    box-sizing: content-box;
+    line-height: 3rem;
+}
+.feedback textarea::-webkit-input-placeholder{
+    color: #9E9E9E;
+    font-size: 1.6rem;
+    line-height: 3rem;
+}
+.feedback textarea:-moz-placeholder{
+    color: #9E9E9E;
+    font-size: 1.6rem;
+    line-height: 3rem;
+}
+.feedback textarea::-moz-placeholder{
+    color: #9E9E9E;
+    font-size: 1.6rem;
+    line-height: 3rem;
+}
+.feedback textarea:-ms-input-placeholder{
+    color: #9E9E9E;
+    font-size: 1.6rem;
+    line-height: 3rem;
+}
+
+
+
+/* 活动 */
+.activityUl{
+    padding-top: 4rem;
+}
+.activityUl li{
+    padding: 1.2rem 1rem;
+    box-sizing: border-box;
+}
+.activityUl li .fr{
+    width: 25%;
+}
+.activityUl li .fr img{
+    width: 100%;
+    max-height: 6.4rem;
+    border-radius: 0.3rem;
+}
+.activityUl li .fl{
+    width: 75%;
+}
+.activityUl li .fl h3{
+    width: 95%;
+    height: 3.6rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.1rem;
+    line-height: 1.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.activityUl li .fl p{
+    color: #B6B6B6;
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+}
+
+
+
+/* 活动详情 */
+.activityDetail{
+    padding: 5rem 2rem 0;
+}
+.activityDetail h2{
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 2.1rem;
+}
+.activityDetail h4{
+    color: #B9B9B9;
+    margin-top: 0.6rem;
+}
+.activityImg img{
+    width: 100%;
+    margin: 1rem 0;
+}
+.activityDetail p{
+    font-size: 1.6rem;
+    color: #686868;
+    line-height: 2rem;
+    text-indent: 2.5rem;
+}
+
+
+
+/* 场馆申请 */
+.venueApplicate{
+    padding: 5rem 1rem 0;
+    margin-bottom: 1.2rem;
+}
+.venueApplicate>p{
+    color: #A2A2A2;
+    font-size: 1.2rem;
+    text-align: center;
+}
+.addbcMid h5{
+    font-weight: 600;
+    line-height: 3.6rem;
+}
+.uploadImg{
+    overflow: hidden;
+    padding-bottom: 1rem;
+}
+.uploadImg .upload{
+    width: calc(50% - 0.5rem);
+    height: 8rem;
+    margin: 1.2rem 1rem 0 0;
+    float: left;
+    text-align: center;
+}
+.uploadImg .upload:nth-child(2n){
+    margin-right: 0;
+}
+
+.upload label{
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 5.5rem;
+    padding: 0.8rem 0;
+    background-color: #F2F2F2;
+    
+}
+.upload label input{
+    position: absolute;
+    top: 0.8rem;
+    left: calc(50% - 2rem);
+    width: 4rem;
+    height: 4rem;
+    opacity: 0;
+}
+.upload label .imgId{
+    position: absolute;
+    top: 0.8rem;
+    left: calc(50% - 2rem);
+    width: 4rem;
+}
+.upload label .imgUpload{
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 8rem;
+}
+.upload p{
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    padding-bottom: 0.3rem;
+    background-color: #F2F2F2;
+}
+
+.upDelate{
+    width: 3rem;
+    height: 2rem;
+    text-align: center;
+    background-color: transparent;
+    top: 0;
+    right: 0;
+    z-index: 600;
+}
+.upDelate img{
+    width: 1.5rem;
+}
+
+
+
+/* 场馆申请成功 */
+.sucImg span{
+    color: #AAAAAA;
+    line-height: 2rem;
+}
+
+
+
+/* 预订说明 */
+.subscribe{
+    padding: 4rem 0 0.1rem;
+    background-color: #2683F4;
+}
+.subscribe img{
+    width: 100%;
+}
+.book{
+    margin: 0 1.6rem 1rem;
+    padding: 1rem 1rem 3rem;
+    background-color: #fff;
+    border-radius: 0.6rem;
+    color: #898989;
+    line-height: 1.8rem;
+}
+.book h5{
+    color: #424242;
+    font-size: 1.6rem;
+    line-height: 3.2rem;
+    font-weight: 500;
+}
+
+
+
+/* 惠民优惠 */
+.discount{
+    background-color: #F2F2F2;
+    padding: 5rem 1rem 0;
+}
+.discountNum{
+    background-color: #505460;
+    color: #EDC895;
+    border-radius: 0.4rem 0.4rem 0 0;
+}
+.discountNum p{
+    top: 0;
+    left: 0;
+    padding: 1rem 1rem 0;
+    color: #EDC895;
+}
+.discountNum p span{
+    top: 1rem;
+    right: 1rem;
+    text-align: right;
+}
+.discountNum h2{
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 1.5rem 0;
+}
+.discountNum h2 span{
+    font-size: 2rem;
+}
+.consumeList h3{
+    color: #2e2e2e;
+    font-size: 1.6rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #F1F1F1;
+}
+
+
+
+/* 惠民抢注 */
+.book h1{
+    text-align: center;
+    color: #3F107E;
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+.book h1 img{
+    display: inline-block;
+    width: 1.5rem;
+}
+
+
+/* 绑定银行卡才可抢注 */
+.rushBC{
+    width: 20rem;
+    height: 4rem;
+    top: calc(50% - 2rem);
+    left: calc(50% - 10rem);
+    z-index: 800;
+    zoom: 1;
+    line-height: 4rem;
+    color: #fff;
+    border-radius: 0.3rem;
+    background-color: rgba(0,0,0,0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#b2000000, endcolorstr=#b2000000);
+}
+.rushBC p{
+    font-size: 1.6rem;
+}
+.rushQ{
+    height: 5.2rem;
+    padding: 0.6rem 0;
+    top: calc(50% - 2rem);
+    line-height: 2rem;
+}
+/* 遮罩 */
+.rushCover{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 600;
+    zoom: 1;
+    background-color: rgba(0,0,0,0.5);
+    filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7f000000, endcolorstr=#7f000000);
+}
+.rushCover h3{
+    color: #373737;
+    font-size: 1.6rem;
+    letter-spacing: 0.1rem;
+}
+.rushCover p{
+    color: #A2A2A2;
+    margin: 0.7rem 0 2.1rem;
+}
+.rushCover button{
+    width: 100%;
+    height: 3.2rem;
+    line-height: 3.2rem;
+    background-color: #FA3F3F;
+    color: #fff;
+    font-size: 1.6rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+.rushCover .pr{
+    width: 72%;
+    background-color: #fff;
+    top: calc(50% - 9rem);
+    left: 14%;
+    padding-top: 6rem;
+    border-radius: 0.5rem;
+}
+.rushCover .pa{
+    width: 14rem;
+    top: -7rem;
+    left: calc(50% - 7rem);
+}
+.rushCover .pa img{
+    width: 100%;
+}
+
+.rushA{
+    display: none;
+}
+.rushQ{
+    display: none;
+}
+
+.rushNoQ{
+    display: none;
+}
+.rushSuc{
+    display: none;
+}
+.rushFull{
+    display: none;
+}
+
+
+
+/* 消息中心 */
+.newsCenter ul{
+    padding: 1rem;
+    box-sizing: border-box;
+}
+.newsCenter ul li{
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.newsImg{
+    width: 5rem;
+}
+.newsImg img{
+    width: 100%;
+}
+.newsImg .pa{
+    width: 1rem;
+    top: -0.5rem;
+    right: 0.3rem;
+}
+.newsImg .pa img{
+    width: 100%;
+}
+.newsCenter .fl{
+    margin-right: 1rem;
+}
+.newsCenter h4{
+    color: #555555;
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+}
+.newsCenter .fl p{
+    color: #9E9E9E;
+}
+.newsCenter .pa{
+    top: 0.5rem;
+    right: 1rem;
+    color: #D1D1D1;
+    padding-top: 0.6rem;
+    font-size: 1.3rem;
+}
+.newsCenter h3{
+    text-align: center;
+    color: #777777;
+    line-height: 2.8rem;
+    font-size: 1.2rem;
+}
+
+

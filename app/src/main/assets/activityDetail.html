@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>活动</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Home/wap/css/mui.min.css"/>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+		<script src="/Public/Home/wap/js/jquery.min.js"></script>
+		<script src="/Public/Home/wap/js/mui.min.js"></script>
+		<!-- <script src="/Public/Home/wap/js/common.js"></script> -->
+        <style>
+            body{
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>活动详情</h2>
+        </div>
+
+        <!-- 活动详情 -->
+        <div class="activityDetail">
+            <h2></h2>
+            <h4>
+                <span class="acName"></span> | 
+                <span class="acTime"></span>
+            </h4>
+            <div class="activityImg">
+                <img src="" alt="图片：活动详情"/>
+            </div>
+            <p>
+                
+            </p>
+        </div>
+
+        <script>
+            function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/activityDetail.html?action_id=4&token=2ddad74fa1e12f90290c6cef88db322a&fromType=iOS";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    // fromType = theRequest.fromType
+                    // token = theRequest.token
+                    action_id = theRequest.action_id
+                }
+                return theRequest;
+            }
+            // var fromType = GetRequest().fromType;
+            // var token = GetRequest().token;
+            var action_id = decodeURI(GetRequest().action_id);
+//          console.log(fromType)
+//          console.log(token)
+//          console.log(action_id)
+			
+            console.log(action_id);
+            $.ajax({
+                url: apiUrl + "/Action/actionInfo",
+                type: "post",
+                data: {
+                    action_id: action_id
+                },
+                success: function(res){
+                    console.log(res)
+                    if(res.code == 1){
+                    	$(".activityDetail").find("h2").text(res.data.name);
+	                    $(".activityDetail").find(".acName").text(res.data.venue_name);
+	                    $(".activityDetail").find(".acTime").text(res.data.create_time);
+	                    $(".activityDetail").find("img").attr("src",res.data.pic);
+	                    $(".activityDetail").find("p").html(res.data.rule);
+                   	}else{
+                   		mui.toast(res.message);
+                   	}
+                },
+                error: function(){
+                    mui.toast("出错了，请重试！");
+                }
+            });
+            
+        </script>
+
+    </body>
+</html>

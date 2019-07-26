@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>绑卡成功</title>
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+        <style>
+            body{
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2></h2>
+        </div>
+
+        <div class="paddingTop sucImg">
+            <img src="/Public/Home/wap/images/suc.png" alt="绑卡成功"/>
+            <p>绑卡成功</p>
+        </div>
+
+        <!-- 完成 -->
+        <div class="addbcBtn">
+            <button>完成</button>
+        </div>
+        
+        <script type="text/javascript">
+        	console.log(jumpUrl);
+        	
+        	function GetRequest() {
+//              var url = "http://jintihui.txunda.com/index.php/Home/Wap/news.html?token=96a46052ebed68f03181f164fd19ab45";
+                var url = location.search; //获取url中"?"符后的字串   
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.split("?")[1];
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                    token = theRequest.token
+                }
+                return theRequest;
+            }
+            var token = GetRequest().token;
+            console.log(token);
+            
+        	$(".addbcBtn button").click(function(){
+                $(location).attr('href', jumpUrl + '/bankCardList.html?token=' + token);
+            })
+        </script>
+    </body>
+</html>

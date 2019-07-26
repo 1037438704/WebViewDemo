@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name = "format-detection" content = "telephone=no">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>惠民优惠</title>
+        <link rel="stylesheet" href="/Public/Home/wap/css/mui.min.css" />
+        <link rel="stylesheet" href="/Public/Home/wap/css/common.css" />
+        <script src="/Public/Home/wap/js/jquery.min.js"></script>
+        <script src="/Public/Home/wap/js/mui.min.js"></script>
+        <style>
+	        body{
+	            background-color: #fff;
+	        }
+	        .consumeList li .pa{
+	            color: #FA4E4E;
+	        }
+	        .discountNum .spacial{
+                color: #EDC895;
+            }
+            a{
+              text-decoration:none;
+               pointer-events:none; 
+               color:#black;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- 顶部 -->
+        <div class="pf top">
+            <h2>惠民优惠</h2>
+        </div>
+
+        <div class="discount">
+            <div class="discountNum">
+                <p class="pr">
+                	<span class="special">惠民优惠： 2019/07-2020/08</span>
+                    <span class="pa">达标额度500元</span>
+                </p>
+                <h2>
+                    已完成 <span>380</span> 元
+                </h2>
+            </div>
+        </div>
+
+        <!-- 惠民优惠列表 -->
+        <div class="consumeList">
+            <h3>惠民记录</h3>
+            <ul>
+                
+            </ul>
+        </div>
+
+		<script type="text/javascript">
+			$(function(){
+                function GetRequest() {
+    //              var url = "http://jintihui.txunda.com/index.php/Home/Wap/feedback.html?token=96a46052ebed68f03181f164fd19ab45";
+                    var url = location.search; //获取url中"?"符后的字串   
+                    var theRequest = new Object();
+                    if (url.indexOf("?") != -1) {
+                        var str = url.split("?")[1];
+                        strs = str.split("&");
+                        for (var i = 0; i < strs.length; i++) {
+                            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                        }
+                        token = theRequest.token
+                    }
+                    return theRequest;
+                }
+                var token = GetRequest().token;
+                console.log(token);
+
+                $.ajax({
+                    url: apiUrl + "/OrderLog/discountList",
+                    type: "post",
+                    data: {
+                        token: token
+                    },
+                    success: function(res){
+                        console.log(res);
+                        if(res.code == 1){
+                        	if(res.message == '暂无数据'){
+                        		var list = "<p style='text-align: center;padding-top: 3rem;'>暂无数据</p>";
+                        	}else{
+                        		var list = "";
+	                            for(var i = 0;i < res.data.length;i ++){
+	                                list += "<li><div class='pa'>+" + res.data[i].money + "</div><h4>" + res.data[i].name + 
+	                                    "</h4><p><span class='time'>" + res.data[i].create_time + 
+	                                    "</span><span class='tailNum'>银行卡尾号：" + res.data[i].card_bank + "</span></p></li>";
+	                            }
+                        	}
+                            
+                            // console.log(list)
+                            $(".consumeList ul").html(list);
+                            // $(".mui-scroll").css("transform",'translate3d(0px, 0px, 0px) translateZ(0px)');
+                        }else{
+                            mui.toast(res.message);
+                        }
+                    },
+                    error: function(){
+                        mui.toast("出错了，请重试！");
+                    }
+                })
+                
+            })
+		</script>
+    </body>
+</html>
